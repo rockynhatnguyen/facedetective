@@ -1,0 +1,22 @@
+.ImageLinkForm {
+
+}
+
+.form {
+  background-color: #2EC4B6;
+}
+
+input[type=text] {
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+  border: 1px solid #ccc;
+}
+
+.button {
+  background-color: #FF9F1C;
+}
