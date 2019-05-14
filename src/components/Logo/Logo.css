@@ -1,0 +1,16 @@
+.logo {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+.Tilt {
+  background-color: #FDFFFC;
+  height: 150px;
+  width: 150px;
+}
+
+.logo-image {
+  height: 100%;
+  width: 100%;
+}
