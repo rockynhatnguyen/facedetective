@@ -7,6 +7,7 @@ import Rank from './components/Rank/Rank';
 import Clarifai from 'clarifai';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import Signin from './components/Signin/Signin';
 
 const particlesOptions = {
   particles: {
@@ -74,11 +75,41 @@ class App extends React.Component {
     this.state = {
       input: '',
       imageUrl: '',
+      box: {},
+      error: false,
+      errorStatus: '1000',
+      initialError: false,
+      route: 'signin'
     }
+  }
+
+  reset = () => {
+    this.setState({ error: this.state.initialError });
+    console.log('RESET to error false.');
+    console.log(this.state.error);
+  }
+
+  calculateFaceLocation = (data) => {
+    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputimage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+        leftCol: clarifaiFace.left_col * width,
+        topRow: clarifaiFace.top_row * height,
+        rightCol: width - (clarifaiFace.right_col * width),
+        bottomRow: height - (clarifaiFace.bottom_row * height)
+    }
+  }
+
+  displayFaceBox = (box) => {
+    console.log(box);
+    this.setState({ box: box })
   }
 
   onInputChange = (event) => {
     this.setState({input: event.target.value })
+    this.reset();
   }
 
   onSubmit = () => {
@@ -87,15 +118,21 @@ class App extends React.Component {
       "a403429f2ddf4b49b307e318f00e528b",
       // don't use this.state.imageUrl will throw error
       this.state.input)
-    .then(
-    function(response) {
-      // do something with response
-      console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
-    },
-    function(err) {
-      // there was an error
-    }
-  );
+    .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+    .catch(err => {
+      console.log('There was an error.');
+      this.setState({ error: true });
+      console.log(this.state.errorStatus);
+      console.log(err);
+      console.log(err.status);
+      this.setState({ errorStatus: err.status });
+      console.log(this.state.errorStatus);
+      console.log(this.state.error);
+    });
+  }
+
+  onRouteChange = (route) => {
+    this.setState({route: route});
   }
 
   render() {
@@ -104,13 +141,22 @@ class App extends React.Component {
         <Particles className='particles'
           params={particlesOptions}
         />
-        <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm
-        onInputChange={this.onInputChange}
-        onSubmit={this.onSubmit} />
-        <FaceRecognition imageUrl={this.state.imageUrl}/>
+        <Navigation onRouteChange={this.onRouteChange}/>
+        { this.state.route === 'signin'
+          ? <Signin onRouteChange={this.onRouteChange} />
+          : <div>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onSubmit={this.onSubmit} />
+            <FaceRecognition
+              box={this.state.box}
+              imageUrl={this.state.imageUrl}
+              noFace={this.state.error}
+              errorStatus={this.state.errorStatus} />
+          </div>
+        }
       </div>
     );
   }
