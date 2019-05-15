@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/facedetective/static/css/main.1aecdda6.chunk.css",
+    "main.js": "/facedetective/static/js/main.48c0f322.chunk.js",
+    "main.js.map": "/facedetective/static/js/main.48c0f322.chunk.js.map",
+    "runtime~main.js": "/facedetective/static/js/runtime~main.ead05b95.js",
+    "runtime~main.js.map": "/facedetective/static/js/runtime~main.ead05b95.js.map",
+    "static/css/2.31dafeb2.chunk.css": "/facedetective/static/css/2.31dafeb2.chunk.css",
+    "static/js/2.ce7dd8df.chunk.js": "/facedetective/static/js/2.ce7dd8df.chunk.js",
+    "static/js/2.ce7dd8df.chunk.js.map": "/facedetective/static/js/2.ce7dd8df.chunk.js.map",
+    "index.html": "/facedetective/index.html",
+    "precache-manifest.e2ce03effd1b96cd1043836513afc337.js": "/facedetective/precache-manifest.e2ce03effd1b96cd1043836513afc337.js",
+    "service-worker.js": "/facedetective/service-worker.js",
+    "static/css/2.31dafeb2.chunk.css.map": "/facedetective/static/css/2.31dafeb2.chunk.css.map",
+    "static/css/main.1aecdda6.chunk.css.map": "/facedetective/static/css/main.1aecdda6.chunk.css.map",
+    "static/media/logo.png": "/facedetective/static/media/logo.e009a67d.png"
+  }
+}
